@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+
+<SplitPane dividerPositions="0.3875" fx:controller="com.example.kursachjavafx.FxController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <Canvas fx:id="mainCanvas" height="494.0" width="585.0" />
+      <Button fx:id="startButton" mnemonicParsing="false" onAction="#buttonPressed" prefHeight="24.0" prefWidth="132.0" text="Button" />
+   </items>
+</SplitPane>
