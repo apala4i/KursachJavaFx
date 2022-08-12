@@ -4,9 +4,8 @@ import com.example.kursachjavafx.Transformations.TransformationMatrix;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import com.example.kursachjavafx.frameModel.FrameModel;
+import com.example.kursachjavafx.Figure.frameModel.FrameModel;
 
 public class FxController {
 
@@ -41,10 +40,8 @@ public class FxController {
         var graphicsContext = mainCanvas.getGraphicsContext2D();
         graphicsContext.clearRect(0, 0, Configs.APPLICATION_WINDOW_WIDTH, Configs.APPLICATION_WINDOW_HEIGHT);
         drawFrameModel(square);
-        TransformationMatrix.rotateYMatrix(15).perform(square.getPoints());
+        TransformationMatrix.rotateYMatrix(15, square.getCenter()).perform(square.getPoints());
         graphicsContext.save();
     }
-
-
 
 }
