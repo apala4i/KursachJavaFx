@@ -9,7 +9,7 @@
 
 <SplitPane dividerPositions="0.3875" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="491.0" prefWidth="727.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.kursachjavafx.FxController">
    <items>
-      <Canvas fx:id="mainCanvas" height="494.0" width="585.0" />
+      <Canvas fx:id="canvas" height="494.0" width="585.0" />
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
             <TextField prefHeight="38.0" prefWidth="65.0" />

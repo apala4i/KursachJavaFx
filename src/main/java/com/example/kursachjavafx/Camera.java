@@ -12,17 +12,23 @@ public class Camera {
 
     public Camera() {}
 
-    public Camera(Point angles, Point position) {
-        this.angles = angles;
-        this.position = position;
-
+    public void update() {
         var positionMatrix = TransformationMatrix.transferMatrix(position);
-        var anglesMatrix = TransformationMatrix.rotateMatrix(angles, new Point(0, 0, 0));
+        var anglesMatrix =
+                TransformationMatrix.rotateMatrix(angles, new Point(0, 0, 0));
         cameraMatrix = new TransformationMatrix
                 (positionMatrix.getTransformMatrix().mult(anglesMatrix.getTransformMatrix()));
     }
 
+    public Camera(Point angles, Point position) {
+        this.angles = angles;
+        this.position = position;
+
+
+    }
+
     public void apply(Figure figure) {
+        update();
         cameraMatrix.perform(figure.getPoints());
     }
 
@@ -56,6 +62,7 @@ public class Camera {
         }
 
         public Camera build() {
+            camera.update();
             return camera;
         }
     }

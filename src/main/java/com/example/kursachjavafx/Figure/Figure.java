@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface Figure extends Cloneable {
     List<Point> getPoints();
+    void setPoints(List<Point> points);
     void draw(DrawingCanvas drawingCanvas);
     Figure clone();
 }

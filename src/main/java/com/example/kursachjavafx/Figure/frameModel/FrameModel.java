@@ -10,7 +10,7 @@ import java.util.List;
 public class FrameModel implements Figure {
     private List<Point> points;
     private Point center = new Point(0, 0, 0);
-    private Point color;
+    private Point color = new Point(0, 0, 0);
 
     public Point getCenter() {
         return center;
@@ -36,8 +36,15 @@ public class FrameModel implements Figure {
     }
 
     @Override
-    public void draw(DrawingCanvas drawingCanvas) {
+    public void setPoints(List<Point> points) {
+        this.points = points;
+    }
 
+    @Override
+    public void draw(DrawingCanvas drawingCanvas) {
+        for (int i = 0; i < points.size(); ++i) {
+            drawingCanvas.drawLine(points.get(i), points.get((i + 1) % points.size()), color);
+        }
     }
 
     public static class Builder {

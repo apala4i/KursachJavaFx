@@ -39,32 +39,37 @@ public class TransformationMatrix {
         return transferMatrix(point.getX(), point.getY(), point.getZ());
     }
 
-    public static TransformationMatrix scaleMatrix(double sx, double sy, double sz) {
-        return new TransformationMatrix(new SimpleMatrix(new double[][]{
-                {sx, 0, 0, 0},
-                {0, sy, 0, 0},
-                {0, 0, sz, 0},
+    public static TransformationMatrix scaleMatrix(Point scale) {
+        return scaleMatrix(scale, new Point(0, 0, 0));
+    }
+
+    public static TransformationMatrix scaleMatrix(Point scale, Point center) {
+        var scaleMatrix = new TransformationMatrix(new SimpleMatrix(new double[][]{
+                {scale.getX(), 0, 0, 0},
+                {0, scale.getY(), 0, 0},
+                {0, 0, scale.getZ(), 0},
                 {0, 0, 0, 1}}
         ));
+        return transformationMatrixWithCenter(scaleMatrix, center);
     }
 
 
 
     public static TransformationMatrix rotateMatrix(Point angles, Point center) {
         var rotateX = rotateXMatrix(angles.getX());
-        var rotateY = rotateXMatrix(angles.getY());
-        var rotateZ = rotateXMatrix(angles.getZ());
+        var rotateY = rotateYMatrix(angles.getY());
+        var rotateZ = rotateZMatrix(angles.getZ());
 
         var complexRotate = new TransformationMatrix(rotateX.transformMatrix
                 .mult(rotateY.transformMatrix).mult(rotateZ.transformMatrix));
 
-        return rotateMatrixWithCenter(complexRotate, center);
+        return transformationMatrixWithCenter(complexRotate, center);
     }
 
 
     // X rotation
     public static TransformationMatrix rotateXMatrix(double angle, Point center) {
-        return rotateMatrixWithCenter( new TransformationMatrix(new SimpleMatrix(new double[][]{
+        return transformationMatrixWithCenter( new TransformationMatrix(new SimpleMatrix(new double[][]{
                 {1, 0, 0, 0},
                 {0, Math.cos(Math.toRadians(angle)), Math.sin(Math.toRadians(angle)), 0},
                 {0, -Math.sin(Math.toRadians(angle)), Math.cos(Math.toRadians(angle)), 0},
@@ -85,7 +90,7 @@ public class TransformationMatrix {
 
     // Y rotation
     public static TransformationMatrix rotateYMatrix(double angle, Point center) {
-        return rotateMatrixWithCenter( new TransformationMatrix(new SimpleMatrix(new double[][]{
+        return transformationMatrixWithCenter( new TransformationMatrix(new SimpleMatrix(new double[][]{
                 {Math.cos(Math.toRadians(angle)), 0, -Math.sin(Math.toRadians(angle)), 0},
                 {0, 1, 0, 0},
                 {Math.sin(Math.toRadians(angle)), 0, Math.cos(Math.toRadians(angle)), 0},
@@ -106,7 +111,7 @@ public class TransformationMatrix {
 
     // Z rotation
     public static TransformationMatrix rotateZMatrix(double angle, Point center) {
-        return rotateMatrixWithCenter( new TransformationMatrix(new SimpleMatrix(new double[][]{
+        return transformationMatrixWithCenter( new TransformationMatrix(new SimpleMatrix(new double[][]{
                 {Math.cos(Math.toRadians(angle)), Math.sin(Math.toRadians(angle)), 0, 0},
                 {-Math.sin(Math.toRadians(angle)), Math.cos(Math.toRadians(angle)), 0, 0},
                 {0, 0, 1, 0},
@@ -125,7 +130,7 @@ public class TransformationMatrix {
 
 
     // Base rotation with center
-    public static TransformationMatrix rotateMatrixWithCenter(TransformationMatrix matrix, Point center) {
+    public static TransformationMatrix transformationMatrixWithCenter(TransformationMatrix matrix, Point center) {
         var moveBack = transferMatrix(-center.getX(), -center.getY(), -center.getZ());
         var moveForward = transferMatrix(center);
 

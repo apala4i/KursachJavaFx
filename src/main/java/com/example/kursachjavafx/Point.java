@@ -28,6 +28,14 @@ public class Point {
         this.matrix = matrix;
     }
 
+    public void plus(Point point) {
+        matrix = matrix.plus(point.getMatrix());
+    }
+
+    public void minus(Point point) {
+        matrix = matrix.minus(point.getMatrix());
+    }
+
     public double getX() {
         return matrix.get(0, 0);
     }
